@@ -1,0 +1,35 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Countries</span>
+  </nav>
+<div class="container">
+<div style="text-align:center">
+  <h1 class="display-4">
+    Select a country and learn about it
+  </h1>
+</div>
+<form [formGroup]="theForm">
+  <select name="countries" formControlName="countries">
+     <option value="default">Select a country</option>
+      <option *ngFor="let country of countriesList" value="{{country.name}}" selected>{{country.name}}</option>
+    </select>
+</form>
+<div class="card my-4" *ngFor="let details of countryDetails">
+    <div class="card-header">
+      {{details.name}}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">About</h5>
+        <ul class="list-group">
+          <li class="list-group-item">Region: {{details.region}}</li>
+          <li class="list-group-item">SubRegion: {{details.subregion}}</li>
+          <li class="list-group-item">Capital: {{details.capital}}</li>
+          <li class="list-group-item" *ngFor="let lang of details.languages; let i=index">language {{i + 1}}: {{lang.name}}</li>
+        </ul>
+      </div>
+      <div class="card-footer text-muted">
+        <img style="width: 5rem;" src={{details.flag}} alt={{details.name}}>
+      </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
